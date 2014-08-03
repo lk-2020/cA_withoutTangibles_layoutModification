@@ -72,6 +72,28 @@ public class MyButton {
       return false;
   }
 
+
+  public boolean isStopClicked() {
+
+    if ((xTouch[0] > buttonX) && (xTouch[0] < (buttonX + buttonWidth))
+      && (yTouch[0] > buttonY)
+      && (yTouch[0] < (buttonY + buttonHeight))) {
+      //if ((x1Touch[0] > x2Touch[0]+5)&&(x1Touch[0] < x2Touch[0]-5)&&(y1Touch[0] < y2Touch[0]-5)&&(y1Touch[0] > y2Touch[0]+5))
+      if (inHere == true)
+      {
+        inHere = false;
+        println("IN STOP CLICKED");
+        print(x1Touch[0] + "        ");
+        print(x2Touch[0] + "        ");
+        println(y1Touch[0] + "        ");
+        print(y2Touch[0] + "        ");
+        return true;
+      }
+    }
+    return false;
+  }
+
+
   public void templateClicked() {
     buttonClicked = true;
     //stroking = true;
@@ -93,6 +115,18 @@ public class MyButton {
       noStroke();
     fill(animColor[tColor]);
     rect(buttonX, buttonY, buttonWidth, buttonHeight, corners, corners, corners, corners);
+  }
+
+
+  public void rp_Draw() {
+    rectMode(CORNER);
+    noStroke();
+    fill(255);
+    rect(buttonX, buttonY, buttonWidth, buttonHeight, corners, corners, corners, corners);
+
+    fill(0);
+    textSize(0.5* buttonHeight);
+    text(buttonText, buttonX + 5, buttonY + (float) 0.65* buttonHeight);
   }
 }
 

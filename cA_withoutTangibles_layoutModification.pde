@@ -1,10 +1,12 @@
 int dWidth=1280;
 int dHeight=720;
-
+int numRcordings=0;
 color skeletonColor = 255;
 boolean first;
 
 boolean buttonSetup = true;
+
+
 
 MyButton recordButton;
 MyButton stopButton;
@@ -13,6 +15,8 @@ MyButton playButton;
 MyButton template1Button;
 MyButton template2Button;
 MyButton template3Button;
+
+
 
 int recordButtonX;
 int recordButtonY;
@@ -46,6 +50,16 @@ int template3ButtonY;
 int template3ButtonWidth = template1ButtonWidth;
 int template3ButtonHeight = template1ButtonHeight;
 
+MyButton[] rp_Button;
+int[] rp_ButtonX;
+int[] rp_ButtonY;
+int rp_ButtonWidth = 100;
+int rp_ButtonHeight = 50;
+String[] recording = {
+  "Rec 1", "Rec 2", "Rec 3", "Rec 4", "Rec 5", "Rec 6", "Rec 7", "Rec 8", "Rec 9", "Rec 10",
+};
+
+boolean inHere = false;
 
 void setup() {
   first = true;
@@ -63,6 +77,10 @@ void setup() {
   // Initialize Multitouch x y arrays
   xTouch = new float [10];
   yTouch = new float [10]; // Don't use more than ten fingers!
+  x1Touch = new float [10];
+  y1Touch = new float [10];
+  x2Touch = new float [10];
+  y2Touch = new float [10];
   yellow_x = new double[100000];
   yellow_xL = new double[100000];
   yellow_y = new double[100000];
@@ -78,8 +96,8 @@ void setup() {
 
   sqrtL = new float[4]; 
   sqrtR = new float[4];
-//
-//  B = new Buttons();
+  //
+  //  B = new Buttons();
 
   recordButtonX = 0;
   recordButtonY = 0;
@@ -94,6 +112,10 @@ void setup() {
   template2ButtonY = template1ButtonY;
   template3ButtonX = template2ButtonX+template2ButtonWidth; 
   template3ButtonY = template1ButtonY;
+
+  rp_Button = new MyButton[11];//10 recordings possible  (1-10)
+  rp_ButtonX = new int[11];
+  rp_ButtonY = new int[11];
 }
 
 //-----------------------------------------------------------------------------------------
@@ -107,6 +129,7 @@ void draw() {
     firstTrue();
     if (recordButton.isClicked())
     {
+      inHere = true;
       recordButton.buttonClicked = true;
     }
     if (stopButton.isClicked())
@@ -153,6 +176,26 @@ void draw() {
       ifTouchEventIs1();
     if (TouchEvents == 2)
       ifTouchEventIs2();
+
+    
+
+    if (stopButton.isStopClicked())
+    {
+      xTouch[0] = 0.0;
+      yTouch[0] = 0.0;
+      println("STOP CLICKED");
+      //numRcordings++ ;
+      rp_ButtonX[numRcordings] = dWidth-100;
+      rp_ButtonY[numRcordings] = numRcordings * 100;
+      rp_Button[numRcordings] = new MyButton(rp_ButtonX[numRcordings], rp_ButtonY[numRcordings], rp_ButtonWidth, rp_ButtonHeight, recording[numRcordings]);
+      rp_Button[numRcordings].rp_Draw();
+      numRcordings++ ;
+    }
+    
+    for (int l = 0;l< numRcordings;l++)
+    {
+      rp_Button[l].rp_Draw();
+    }
   }
 
   else if (playButton.buttonClicked == true)

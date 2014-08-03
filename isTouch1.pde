@@ -47,7 +47,6 @@ void ifTouchEventIs1()
     //if ((recordButton.buttonClicked == true)||(record==true))
     if ((recordButton.buttonClicked == true))
     {
-      println("RECORDING R");
       it++;
     }
   }
@@ -75,7 +74,6 @@ void ifTouchEventIs1()
     //if ((recordButton.buttonClicked == true)||(record==true))
     if ((recordButton.buttonClicked == true))
     {
-      println("RECORDING L");
       it++;
     }
   }

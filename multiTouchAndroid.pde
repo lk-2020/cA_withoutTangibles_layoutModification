@@ -5,6 +5,10 @@ import android.view.MotionEvent;
 int TouchEvents;
 float xTouch[], playX;
 float yTouch[], playY;
+
+float x1Touch[], x2Touch[];
+float y1Touch[], y2Touch[];
+
 int currentPointerId = 0;
 
 public class xandy
@@ -13,6 +17,7 @@ public class xandy
   public double y;
 }
 
+int test = 0 ;
 
 public boolean surfaceTouchEvent(MotionEvent event) {
   xandy centroid =  new xandy();
@@ -26,6 +31,28 @@ public boolean surfaceTouchEvent(MotionEvent event) {
 
     xTouch[pointerId] = event.getX(i); 
     yTouch[pointerId] = event.getY(i);
+    
+    if (TouchEvents == 1)
+    {
+      if (test%2==0)
+      {
+        x2Touch[pointerId] = event.getX(i); 
+        y2Touch[pointerId] = event.getY(i);
+      }
+      else
+      {
+        x1Touch[pointerId] = event.getX(i); 
+        y1Touch[pointerId] = event.getY(i);
+      }
+      test++;
+      
+      if(test > 1)
+      {
+        test = 0;
+      }
+    }
+    
+    
     float siz = event.getSize(i);
     //println("pointerId  "+pointerId);
   }
