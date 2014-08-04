@@ -3,7 +3,14 @@ double yellow_x[], yellow_xL[];
 double yellow_y[], yellow_yL[];
 double jYellow_x[], jYellow_xL[];
 
+double yellow_x1[][], yellow_xL1[][];
+double yellow_y1[][], yellow_yL1[][];
+double jYellow_x1[][], jYellow_xL1[][];
+float angle11[][],angle21[][],angle111[][];
+boolean touchEvent_1[][];
+
 char charColor[];
+char charColor1[][];
 //boolean first = true;
 boolean touchEvent = false;
 boolean touchEvent1 = false, touchEvent2 = false;

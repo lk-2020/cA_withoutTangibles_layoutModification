@@ -21,42 +21,42 @@ void drawAnimatingChar()
   arc(animatingFaceX-75+75, animatingFaceY+25+25, 75, 75, 0, PI, OPEN);
 }
 
-void ifTouchEventIs1_drawAnimatingHand(int itIncr, float angle) {
+void ifTouchEventIs1_drawAnimatingHand(int rec1, int itIncr, float angle) {
   strokeWeight(25);
   if (template1Button.buttonClicked == true)
   {
-    charColor[itIncr] = 'y';
+    charColor1[rec1][itIncr] = 'y';
     stroke(animColor[0]);
   }
   if (template2Button.buttonClicked == true)
   {
-    charColor[itIncr] = 'p';
+    charColor1[rec1][itIncr] = 'p';
     stroke(animColor[1]);
   }
   if (template3Button.buttonClicked == true)
   {
-    charColor[itIncr] = 'b';
+    charColor1[rec1][itIncr] = 'b';
     stroke(animColor[2]);
   }
   //line((int)jYellow_x[itIncr], whiteRightHandJointY-15, (float)yellow_x[itIncr], (float)yellow_y[itIncr]);// hand
-  segment((int)jYellow_x[itIncr], whiteRightHandJointY-15, angle, yellowHandLength);
+  segment((int)jYellow_x1[rec1][itIncr], whiteRightHandJointY-15, angle, yellowHandLength);
 }
 
-void ifTouchEventIs2_drawAnimatingHand(int itIncr, float yxx, float yyy, int join, float angle) {
+void ifTouchEventIs2_drawAnimatingHand(int rec1, int itIncr, float yxx, float yyy, int join, float angle) {
   strokeWeight(25);
   if (template1Button.buttonClicked == true)
   {
-    charColor[itIncr] = 'y';
+    charColor1[rec1][itIncr] = 'y';
     stroke(animColor[0]);
   }
   if (template2Button.buttonClicked == true)
   {
-    charColor[itIncr] = 'p';
+    charColor1[rec1][itIncr] = 'p';
     stroke(animColor[1]);
   }
   if (template3Button.buttonClicked == true)
   {
-    charColor[itIncr] = 'b';
+    charColor1[rec1][itIncr] = 'b';
     stroke(animColor[2]);
   }
   strokeWeight(25);

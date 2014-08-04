@@ -17,20 +17,20 @@ void ifTouchEventIs2()
       {
         jRx = i;
         touchEvent = true;
-        touchEvent_[it] = false;
+        touchEvent_1[rec][iterations[rec]] = false;
         whiteRightHandEndX = (int)xTouch[i];
         whiteRightHandEndY = (int)yTouch[i];
         dx1 = xTouch[i] - whiteRightHandJointX;
         dy1 = yTouch[i] - whiteRightHandJointY;
-        angle1[it] = atan2(dy1, dx1);
-        yellow_x[it] = (whiteRightHandEndX-whiteRightHandJointX)+(animatingFaceX+whiteSkeletonXincr);
-        yellow_y[it] = whiteRightHandEndY-15;
-        jYellow_x[it] = animatingFaceX-whiteSkeletonXincr+yellowFaceSize;
-        yellow_x_ = (float)yellow_x[it];
-        yellow_y_ = (float)yellow_y[it];
-        jYellow_x_ = (int)jYellow_x[it];
-        angle1_ = angle1[it];
-        ifTouchEventIs2_drawAnimatingHand(it, (float)yellow_x[it], (float) yellow_y[it], (int)jYellow_x[it], (float)angle1[it]);
+        angle111[rec][iterations[rec]] = atan2(dy1, dx1);
+        yellow_x1[rec][iterations[rec]] = (whiteRightHandEndX-whiteRightHandJointX)+(animatingFaceX+whiteSkeletonXincr);
+        yellow_y1[rec][iterations[rec]] = whiteRightHandEndY-15;
+        jYellow_x1[rec][iterations[rec]] = animatingFaceX-whiteSkeletonXincr+yellowFaceSize;
+        yellow_x_ = (float)yellow_x1[rec][iterations[rec]];
+        yellow_y_ = (float)yellow_y1[rec][iterations[rec]];
+        jYellow_x_ = (int)jYellow_x1[rec][iterations[rec]];
+        angle1_ = angle111[rec][iterations[rec]];
+        ifTouchEventIs2_drawAnimatingHand(rec, iterations[rec], (float)yellow_x1[rec][iterations[rec]], (float) yellow_y1[rec][iterations[rec]], (int)jYellow_x1[rec][iterations[rec]], (float)angle11[rec][iterations[rec]]);
       }
     }
   }
@@ -46,24 +46,24 @@ void ifTouchEventIs2()
       if((leftHandJoint1<whiteHandLength+50)&&(leftHandJoint1>whiteHandLength-50))
       { 
         touchEvent = true;
-        touchEvent_[it] = false;
+        touchEvent_1[rec][iterations[rec]] = false;
         whiteLeftHandEndX = (int)xTouch[i];
         whiteLeftHandEndY = (int)yTouch[i];
         dx2 = xTouch[i] - whiteLeftHandJointX;
         dy2 = yTouch[i] - whiteLeftHandJointY;
-        angle2[it] = atan2(dy2, dx2);
-        yellow_xL[it]  = (animatingFaceX-whiteSkeletonXincr) - (whiteLeftHandJointX - whiteLeftHandEndX);
-        yellow_yL[it]  = whiteLeftHandEndY-15;
-        jYellow_xL[it] = animatingFaceX-whiteSkeletonXincr;
-        yellow_xL_ =(float)yellow_xL[it];
-        yellow_yL_ = (float)yellow_yL[it];
-        jYellow_xL_ = (int)jYellow_xL[it];
-        angle2_ = angle2[it];
-        ifTouchEventIs2_drawAnimatingHand(it, (float)yellow_xL[it], (float) yellow_yL[it], (int)jYellow_xL[it], (float)angle2[it]);
-       // if ((record == true)||(recordButton.buttonClicked == true))
+        angle21[rec][iterations[rec]] = atan2(dy2, dx2);
+        yellow_xL1[rec][iterations[rec]]  = (animatingFaceX-whiteSkeletonXincr) - (whiteLeftHandJointX - whiteLeftHandEndX);
+        yellow_yL1[rec][iterations[rec]]  = whiteLeftHandEndY-15;
+        jYellow_xL1[rec][iterations[rec]] = animatingFaceX-whiteSkeletonXincr;
+        yellow_xL_ =(float)yellow_xL1[rec][iterations[rec]];
+        yellow_yL_ = (float)yellow_yL1[rec][iterations[rec]];
+        jYellow_xL_ = (int)jYellow_xL1[rec][iterations[rec]];
+        angle2_ = angle21[rec][iterations[rec]];
+        ifTouchEventIs2_drawAnimatingHand(rec, iterations[rec], (float)yellow_xL1[rec][iterations[rec]], (float) yellow_yL1[rec][iterations[rec]], (int)jYellow_xL1[rec][iterations[rec]], (float)angle21[rec][iterations[rec]]);
        if ((recordButton.buttonClicked == true))
         {
           it++;
+          iterations[rec]++;
         }
       }
     }

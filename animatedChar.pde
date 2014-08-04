@@ -1,12 +1,12 @@
-void drawAnimatedChar(int iter)
+void drawAnimatedChar(int num1, int iter)
 {
   rectMode(CENTER);
   noStroke();
-  if (charColor[iter] == 'y')
+  if (charColor1[num1][iter] == 'y')
     fill(animColor[0]);
-  if (charColor[iter] == 'p')
+  if (charColor1[num1][iter] == 'p')
     fill(animColor[1]);
-  if (charColor[iter] == 'b')
+  if (charColor1[num1][iter] == 'b')
     fill(animColor[2]);
   rect(animatingFaceX, animatingFaceY, 300, 300, 15);// animating face
 
@@ -21,13 +21,13 @@ void drawAnimatedChar(int iter)
   arc(animatingFaceX-75+75, animatingFaceY+25+25, 75, 75, 0, PI, OPEN);
 }
 
-void drawAnimatedHand(int iter, float yxx, float yyy, int join, float angle)
+void drawAnimatedHand(int num1, int iter, float yxx, float yyy, int join, float angle)
 {
-  if (charColor[iter] == 'y')
+  if (charColor1[num1][iter] == 'y')
     stroke(animColor[0]);
-  if (charColor[iter] == 'p')
+  if (charColor1[num1][iter] == 'p')
     stroke(animColor[1]);
-  if (charColor[iter] == 'b')
+  if (charColor1[num1][iter] == 'b')
     stroke(animColor[2]);
 
   strokeWeight(25);

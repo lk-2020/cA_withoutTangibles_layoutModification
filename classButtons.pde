@@ -1,4 +1,5 @@
 int corners = 15;
+int buttonInnerHeight = 25;
 
 color clickedColor = color(255, 0, 0);
 color unClickedColor = color(0, 255, 180);
@@ -53,12 +54,15 @@ public class MyButton {
       fill(clickedColor);
     if (buttonClicked == false)
       fill(unClickedColor);
-    noStroke();
-    rect(buttonX, buttonY, buttonWidth, buttonHeight, corners, corners, corners, corners);
-
-    fill(255);
+    stroke(0);
+    strokeWeight(3);
+    noFill();
+    //ellipseMode(CORNER); 
+    //rect(buttonX, buttonY, buttonWidth, buttonHeight, corners, corners, corners, corners);
+    ellipse(buttonX+buttonWidth/2, buttonY + buttonHeight/2, buttonWidth, buttonWidth);
+    fill(0);
     textSize(0.5* buttonHeight);
-    text(buttonText, buttonX + 5, buttonY + (float) 0.65* buttonHeight);
+    text(buttonText, buttonX + 10, buttonY + (float) 0.65* buttonHeight);
   }
 
   public boolean isClicked() {
@@ -73,23 +77,43 @@ public class MyButton {
   }
 
 
-  public boolean isStopClicked() {
+//  public boolean isStopClicked() {
+//
+//    if ((xTouch[0] > buttonX) && (xTouch[0] < (buttonX + buttonWidth))
+//      && (yTouch[0] > buttonY)
+//      && (yTouch[0] < (buttonY + buttonHeight))) {
+//      //if ((x1Touch[0] > x2Touch[0]+5)&&(x1Touch[0] < x2Touch[0]-5)&&(y1Touch[0] < y2Touch[0]-5)&&(y1Touch[0] > y2Touch[0]+5))
+//      if (inHere == true)
+//      {
+//        inHere = false;
+//        return true;
+//      }
+//    }
+//    return false;
+//  }
 
-    if ((xTouch[0] > buttonX) && (xTouch[0] < (buttonX + buttonWidth))
-      && (yTouch[0] > buttonY)
+ public boolean isStopClicked() {
+
+    if ((xTouch[0] > buttonX - buttonHeight) && (xTouch[0] < (buttonX + buttonHeight))
+      && (yTouch[0] > buttonY - buttonHeight)
       && (yTouch[0] < (buttonY + buttonHeight))) {
       //if ((x1Touch[0] > x2Touch[0]+5)&&(x1Touch[0] < x2Touch[0]-5)&&(y1Touch[0] < y2Touch[0]-5)&&(y1Touch[0] > y2Touch[0]+5))
       if (inHere == true)
       {
         inHere = false;
-        println("IN STOP CLICKED");
-        print(x1Touch[0] + "        ");
-        print(x2Touch[0] + "        ");
-        println(y1Touch[0] + "        ");
-        print(y2Touch[0] + "        ");
         return true;
       }
     }
+    return false;
+  }
+  
+  public boolean isRspClicked() {
+
+    if ((xTouch[0] > buttonX - buttonHeight) && (xTouch[0] < (buttonX + buttonHeight))
+      && (yTouch[0] > buttonY - buttonHeight)
+      && (yTouch[0] < (buttonY + buttonHeight))) {
+        return true;
+      }
     return false;
   }
 
@@ -127,6 +151,33 @@ public class MyButton {
     fill(0);
     textSize(0.5* buttonHeight);
     text(buttonText, buttonX + 5, buttonY + (float) 0.65* buttonHeight);
+  }
+
+  public void drawRoundButtons(int i) {
+    strokeWeight(3);
+    if (buttonClicked == true)
+      stroke(255, 0, 0);
+    if (buttonClicked == false)
+      stroke(0);
+    fill(255);
+    ellipse(buttonX, buttonY, buttonHeight, buttonHeight);
+
+    noStroke();
+    fill(0);
+    if (i == 0)
+    {
+      ellipse(buttonX, buttonY, buttonInnerHeight, buttonInnerHeight); //record
+    }
+    else if (i == 1)
+    {
+      rectMode(CENTER);
+      rect(buttonX, buttonY, buttonInnerHeight/2 + buttonInnerHeight/4, buttonInnerHeight/2 + buttonInnerHeight/4); //stop
+    }
+    else if (i == 2)
+    {
+      triangle(buttonX - buttonInnerHeight/2 + 5, buttonY - buttonInnerHeight/2, buttonX - buttonInnerHeight/2 + 5, buttonY + buttonInnerHeight/2, buttonX + buttonInnerHeight/2+3, buttonY);
+      //ellipse(buttonX, buttonY, buttonHeight, buttonHeight); //play
+    }
   }
 }
 

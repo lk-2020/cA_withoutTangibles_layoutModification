@@ -1,7 +1,11 @@
 int dWidth=1280;
 int dHeight=720;
 int numRcordings=0;
-color skeletonColor = 255;
+
+int[] iterations;
+int rec = 0;
+
+color skeletonColor = 50;
 boolean first;
 
 boolean buttonSetup = true;
@@ -16,7 +20,7 @@ MyButton template1Button;
 MyButton template2Button;
 MyButton template3Button;
 
-
+MyButton doneRp_Button;
 
 int recordButtonX;
 int recordButtonY;
@@ -50,6 +54,13 @@ int template3ButtonY;
 int template3ButtonWidth = template1ButtonWidth;
 int template3ButtonHeight = template1ButtonHeight;
 
+int doneRp_ButtonX;
+int doneRp_ButtonY;
+int doneRp_ButtonWidth = 100;
+int doneRp_ButtonHeight = 50;
+
+int num;
+
 MyButton[] rp_Button;
 int[] rp_ButtonX;
 int[] rp_ButtonY;
@@ -81,29 +92,51 @@ void setup() {
   y1Touch = new float [10];
   x2Touch = new float [10];
   y2Touch = new float [10];
-  yellow_x = new double[100000];
-  yellow_xL = new double[100000];
-  yellow_y = new double[100000];
-  yellow_yL = new double[100000];
-  jYellow_x = new double[100000];
-  jYellow_xL = new double[100000];
-  charColor = new char[100000];
-  angle = new float[100000];
-  angle1 = new float[100000];
-  angle2 = new float[100000];
+  yellow_x = new double[10000];
+  yellow_xL = new double[10000];
+  yellow_y = new double[10000];
+  yellow_yL = new double[10000];
+  jYellow_x = new double[10000];
+  jYellow_xL = new double[10000];
+  charColor = new char[10000];
 
-  touchEvent_ = new boolean[100000];
+  angle = new float[10000];
+  angle1 = new float[10000];
+  angle2 = new float[10000];
+
+  yellow_x1 = new double[10][10000];
+  yellow_xL1 = new double[10][10000];
+  yellow_y1 = new double[10][10000];
+  yellow_yL1 = new double[10][10000];
+  jYellow_x1 = new double[10][10000];
+  jYellow_xL1 = new double[10][10000];
+  touchEvent_1 = new boolean[10][10000];
+  angle11 = new float[10][10000];
+  angle21 = new float[10][10000];
+  angle111 = new float[10][10000];
+  charColor1 = new char[10][10000];
+
+
+  touchEvent_ = new boolean[10000];
 
   sqrtL = new float[4]; 
   sqrtR = new float[4];
-  //
-  //  B = new Buttons();
 
-  recordButtonX = 0;
-  recordButtonY = 0;
-  stopButtonX = recordButtonX + recordButtonWidth + buttonSpacing;
+  iterations = new int[10];
+
+
+//  recordButtonX = 0;
+//  recordButtonY = 0;
+//  stopButtonX = recordButtonX + recordButtonWidth + buttonSpacing;
+//  stopButtonY = recordButtonY;
+//  playButtonX = stopButtonX + stopButtonWidth + buttonSpacing;
+//  playButtonY = recordButtonY;
+
+  recordButtonX = 50;
+  recordButtonY = 50;
+  stopButtonX = recordButtonX + recordButtonHeight + buttonSpacing;
   stopButtonY = recordButtonY;
-  playButtonX = stopButtonX + stopButtonWidth + buttonSpacing;
+  playButtonX = stopButtonX + stopButtonHeight + buttonSpacing;
   playButtonY = recordButtonY;
 
   template1ButtonX = dWidth/2; 
@@ -116,31 +149,37 @@ void setup() {
   rp_Button = new MyButton[11];//10 recordings possible  (1-10)
   rp_ButtonX = new int[11];
   rp_ButtonY = new int[11];
+
+  for (int ll = 0; ll <10 ; ll++)
+  {
+    iterations[ll] = 0;
+  }
+
+  doneRp_ButtonX = dWidth-100;
+  doneRp_ButtonY = dHeight-50;
+
+  doneRp_Button = new MyButton(doneRp_ButtonX, doneRp_ButtonY, doneRp_ButtonWidth, doneRp_ButtonHeight, "DONE");
 }
 
 //-----------------------------------------------------------------------------------------
 
 void draw() {
   buttonSetup();
+
   if (playButton.buttonClicked == false)
   {
     iter=0;// variable to store the actions
-    background(0);
+    background(255);
     firstTrue();
-    if (recordButton.isClicked())
+    if (recordButton.isRspClicked())
     {
       inHere = true;
       recordButton.buttonClicked = true;
     }
-    if (stopButton.isClicked())
-    {
-      recordButton.buttonClicked = false;
-    }
-    if (playButton.isClicked())
+    if (playButton.isRspClicked())
     {
       playButton.buttonClicked = true;
-      xTouch[0] = 0.0;
-      yTouch[0] = 0.0;
+      reInitializeTouchPoints();
     }
     if (template1Button.isClicked())
     {
@@ -160,9 +199,9 @@ void draw() {
       template1Button.buttonClicked = false;
       template2Button.buttonClicked = false;
     }
-    recordButton.draw();
-    stopButton.draw();
-    playButton.draw();
+    recordButton.drawRoundButtons(0);
+    stopButton.drawRoundButtons(1);
+    playButton.drawRoundButtons(2);
     template1Button.templateDraw();
     template2Button.templateDraw();
     template3Button.templateDraw();
@@ -177,69 +216,86 @@ void draw() {
     if (TouchEvents == 2)
       ifTouchEventIs2();
 
-    
-
     if (stopButton.isStopClicked())
     {
-      xTouch[0] = 0.0;
-      yTouch[0] = 0.0;
+      reInitializeTouchPoints();
       println("STOP CLICKED");
-      //numRcordings++ ;
       rp_ButtonX[numRcordings] = dWidth-100;
       rp_ButtonY[numRcordings] = numRcordings * 100;
       rp_Button[numRcordings] = new MyButton(rp_ButtonX[numRcordings], rp_ButtonY[numRcordings], rp_ButtonWidth, rp_ButtonHeight, recording[numRcordings]);
       rp_Button[numRcordings].rp_Draw();
       numRcordings++ ;
-    }
-    
-    for (int l = 0;l< numRcordings;l++)
-    {
-      rp_Button[l].rp_Draw();
+      rec++ ;
+      recordButton.buttonClicked = false;
     }
   }
 
   else if (playButton.buttonClicked == true)
   {
+
     recordButton.buttonClicked = false;
+    background(255);
+    doneRp_Button.draw();
+    whichIsClicked();
 
-    if (it != 0)
+    if (iterations[num] != 0)
     {
-      background(255);
-      iter++;
-      if (!((yellow_x[iter] == 0.0)||(yellow_y[iter] == 0.0)))
+      if (rp_Button[num].buttonClicked == true)
       {
-        drawAnimatedChar(iter);
+        if (iter < iterations[num])
+        {
+          background(255);
+          doneRp_Button.draw();
+          iter++;
+          if (!((yellow_x1[num][iter] == 0.0)||(yellow_y1[num][iter] == 0.0)))
+          {
 
-        if (touchEvent_[iter] == true)
-        {
-          if ((yellow_x[iter] != 0.0)&&(yellow_y[iter] != 0.0))
-            drawAnimatedHand(iter, (int)yellow_x[iter], (int)yellow_y[iter], (int)jYellow_x[iter], angle[iter]);
+            drawAnimatedChar(num, iter);
+
+            if (touchEvent_1[num][iter] == true)
+            {
+              if ((yellow_x1[num][iter] != 0.0)&&(yellow_y1[num][iter] != 0.0))
+                drawAnimatedHand(num, iter, (int)yellow_x1[num][iter], (int)yellow_y1[num][iter], (int)jYellow_x1[num][iter], angle11[num][iter]);
+            }
+            else if (touchEvent_1[num][iter] == false)
+            {
+              if ((yellow_x1[num][iter] != 0.0)&&(yellow_y1[num][iter] != 0.0))
+                drawAnimatedHand(num, iter, (int)yellow_x1[num][iter], (int)yellow_y1[num][iter], (int)jYellow_x1[num][iter], angle111[num][iter]);
+              if ((yellow_xL1[num][iter] != 0.0)&&(yellow_yL1[num][iter] != 0.0))
+                drawAnimatedHand(num, iter, (int)yellow_xL1[num][iter], (int)yellow_yL1[num][iter], (int)jYellow_xL1[num][iter], angle21[num][iter]);
+            }
+          }
         }
-        else if (touchEvent_[iter] == false)
+        else
         {
-          if ((yellow_x[iter] != 0.0)&&(yellow_y[iter] != 0.0))
-            drawAnimatedHand(iter, (int)yellow_x[iter], (int)yellow_y[iter], (int)jYellow_x[iter], angle1[iter]);
-          if ((yellow_xL[iter] != 0.0)&&(yellow_yL[iter] != 0.0))
-            drawAnimatedHand(iter, (int)yellow_xL[iter], (int)yellow_yL[iter], (int)jYellow_xL[iter], angle2[iter]);
+          iter = 0;
+          rp_Button[num].buttonClicked = false;
         }
       }
-      if (iter == it)
+      else if (iterations[num] == 0)
       {
-        playButton.buttonClicked = false;
-        it = 0;
+        //playButton.buttonClicked = false;
       }
     }
-
-    else if (it == 0)
-    {
-      playButton.buttonClicked = false;
-    }
+  }
+  for (int l = 0;l< numRcordings;l++)
+  {
+    rp_Button[l].rp_Draw();
+  }
+  if (doneRp_Button.isClicked())
+  {
+    reInitializeTouchPoints();
+    doneRp_Button.buttonClicked = true;
+  }
+  if (doneRp_Button.buttonClicked == true)
+  {
+    doneRp_Button.buttonClicked = false;
+    playButton.buttonClicked = false;
   }
 }
 
 void firstTrue() //white left body
 {
-  skeletonColor = 255;
   rectMode(CENTER);
   fill(skeletonColor);
   noStroke();
@@ -257,7 +313,6 @@ void firstTrue() //white left body
   }
 }
 
-
 void drawBlueCirclesOnTouch()
 {
   if ((xTouch[0]!=0)&&(yTouch[0]!=0)) 
@@ -267,8 +322,6 @@ void drawBlueCirclesOnTouch()
     }
   }
 }
-
-
 
 void segment(float x, float y, float a, int handLength) {
   pushMatrix();
@@ -297,5 +350,24 @@ void buttonSetup()
 
     buttonSetup = false;
   }
+}
+
+void whichIsClicked()
+{
+  for (int kk=0;kk<numRcordings;kk++)
+  {
+    if (rp_Button[kk].isClicked())
+    {
+      reInitializeTouchPoints();
+      num = kk;
+      rp_Button[num].buttonClicked = true;
+    }
+  }
+}
+
+void reInitializeTouchPoints()
+{
+  xTouch[0] = 0.0;
+  yTouch[0] = 0.0;
 }
 
