@@ -10,8 +10,6 @@ boolean first;
 
 boolean buttonSetup = true;
 
-
-
 MyButton recordButton;
 MyButton stopButton;
 MyButton playButton;
@@ -21,6 +19,9 @@ MyButton template2Button;
 MyButton template3Button;
 
 MyButton doneRp_Button;
+
+MyButton resetButton;
+
 
 int recordButtonX;
 int recordButtonY;
@@ -41,8 +42,8 @@ int buttonSpacing = 20;
 
 int template1ButtonX;
 int template1ButtonY;
-int template1ButtonWidth = 100;
-int template1ButtonHeight = 100;
+int template1ButtonWidth = 50;
+int template1ButtonHeight = 50;
 
 int template2ButtonX;
 int template2ButtonY;
@@ -57,17 +58,27 @@ int template3ButtonHeight = template1ButtonHeight;
 int doneRp_ButtonX;
 int doneRp_ButtonY;
 int doneRp_ButtonWidth = 100;
-int doneRp_ButtonHeight = 50;
+int doneRp_ButtonHeight = 80;
 
 int num;
 
 MyButton[] rp_Button;
 int[] rp_ButtonX;
 int[] rp_ButtonY;
-int rp_ButtonWidth = 100;
-int rp_ButtonHeight = 50;
+int rp_ButtonWidth = 70;
+int rp_ButtonHeight = 45;
 String[] recording = {
-  "Rec 1", "Rec 2", "Rec 3", "Rec 4", "Rec 5", "Rec 6", "Rec 7", "Rec 8", "Rec 9", "Rec 10",
+  "REC 1", "REC 2", "REC 3", "REC 4", "REC 5", "REC 6", "REC 7", "REC 8", "REC 9", "REC 10",
+};
+
+MyButton[] templateButton;
+int[] templateButtonX;
+int[] templateButtonY;
+int templateButtonWidth = 50;
+int templateButtonHeight = 50;
+
+color[] templateColor = {
+  color(255, 255, 0)/*yellow*/, color(125, 193, 255)/*pink*/, color(184, 20, 103)/*blue*/
 };
 
 boolean inHere = false;
@@ -124,27 +135,21 @@ void setup() {
 
   iterations = new int[10];
 
-
-//  recordButtonX = 0;
-//  recordButtonY = 0;
-//  stopButtonX = recordButtonX + recordButtonWidth + buttonSpacing;
-//  stopButtonY = recordButtonY;
-//  playButtonX = stopButtonX + stopButtonWidth + buttonSpacing;
-//  playButtonY = recordButtonY;
-
   recordButtonX = 50;
   recordButtonY = 50;
-  stopButtonX = recordButtonX + recordButtonHeight + buttonSpacing;
-  stopButtonY = recordButtonY;
-  playButtonX = stopButtonX + stopButtonHeight + buttonSpacing;
-  playButtonY = recordButtonY;
+  stopButtonX = recordButtonX;// + recordButtonHeight + buttonSpacing;
+  stopButtonY = recordButtonY + recordButtonHeight + buttonSpacing;
+  playButtonX = stopButtonX;// + stopButtonHeight + buttonSpacing;
+  playButtonY = stopButtonY + stopButtonHeight + buttonSpacing;
 
-  template1ButtonX = dWidth/2; 
-  template1ButtonY = 0;
-  template2ButtonX = template1ButtonX+template1ButtonWidth; 
-  template2ButtonY = template1ButtonY;
-  template3ButtonX = template2ButtonX+template2ButtonWidth; 
-  template3ButtonY = template1ButtonY;
+
+
+  template1ButtonX = recordButtonX - template1ButtonWidth/2; 
+  template1ButtonY = dHeight/2 ;
+  template2ButtonX = template1ButtonX; 
+  template2ButtonY = template1ButtonY+template1ButtonWidth;
+  template3ButtonX = template2ButtonX; 
+  template3ButtonY = template2ButtonY+template2ButtonWidth;
 
   rp_Button = new MyButton[11];//10 recordings possible  (1-10)
   rp_ButtonX = new int[11];
@@ -156,7 +161,7 @@ void setup() {
   }
 
   doneRp_ButtonX = dWidth-100;
-  doneRp_ButtonY = dHeight-50;
+  doneRp_ButtonY = dHeight-100;
 
   doneRp_Button = new MyButton(doneRp_ButtonX, doneRp_ButtonY, doneRp_ButtonWidth, doneRp_ButtonHeight, "DONE");
 }
@@ -220,8 +225,8 @@ void draw() {
     {
       reInitializeTouchPoints();
       println("STOP CLICKED");
-      rp_ButtonX[numRcordings] = dWidth-100;
-      rp_ButtonY[numRcordings] = numRcordings * 100;
+      rp_ButtonX[numRcordings] = dWidth-80;
+      rp_ButtonY[numRcordings] = numRcordings * (rp_ButtonHeight+10);
       rp_Button[numRcordings] = new MyButton(rp_ButtonX[numRcordings], rp_ButtonY[numRcordings], rp_ButtonWidth, rp_ButtonHeight, recording[numRcordings]);
       rp_Button[numRcordings].rp_Draw();
       numRcordings++ ;
@@ -236,6 +241,7 @@ void draw() {
     recordButton.buttonClicked = false;
     background(255);
     doneRp_Button.draw();
+    //doneRp_Button.rp_Draw();
     whichIsClicked();
 
     if (iterations[num] != 0)
@@ -305,8 +311,8 @@ void firstTrue() //white left body
   {
     strokeWeight(25);
     stroke(skeletonColor);
-    line(whiteRightHandJointX, whiteRightHandJointY, 300+100, 200); //white right hand skeleton
-    line(whiteLeftHandJointX, whiteRightHandJointY, 300-200, 200); //white left hand skeleton
+    line(whiteRightHandJointX, whiteRightHandJointY, whiteRightHandEndX, whiteRightHandEndY); //white right hand skeleton
+    line(whiteLeftHandJointX, whiteRightHandJointY, whiteLeftHandEndX, whiteLeftHandEndY); //white left hand skeleton
     stroke(animColor[0]);
     segment(jYellow_x_, whiteRightHandJointY-15, angle1_, yellowHandLength);
     segment(jYellow_xL_, whiteRightHandJointY-15, angle2_, yellowHandLength);
@@ -347,7 +353,8 @@ void buttonSetup()
     template1Button.templateClicked();
     template2Button.templateUnClicked();
     template3Button.templateUnClicked();
-
+    resetButton = new MyButton(resetButtonX, resetButtonY, resetButtonWidth, resetButtonHeight, 0);
+    
     buttonSetup = false;
   }
 }
@@ -369,5 +376,13 @@ void reInitializeTouchPoints()
 {
   xTouch[0] = 0.0;
   yTouch[0] = 0.0;
+}
+
+
+void Reset()
+{
+  buttonSetup();
+  playButton.buttonClicked = true;
+  first = true;
 }
 
