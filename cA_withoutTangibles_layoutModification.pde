@@ -22,7 +22,7 @@ MyButton doneRp_Button;
 
 MyButton resetButton;
 
-
+                                                                                            
 int recordButtonX;
 int recordButtonY;
 int recordButtonWidth = 100;
@@ -59,6 +59,11 @@ int doneRp_ButtonX;
 int doneRp_ButtonY;
 int doneRp_ButtonWidth = 100;
 int doneRp_ButtonHeight = 80;
+
+int resetButtonX = 10;
+int resetButtonY = dHeight-70;
+int resetButtonWidth = 100;
+int resetButtonHeight = 60;
 
 int num;
 
@@ -175,6 +180,12 @@ void draw() {
   {
     iter=0;// variable to store the actions
     background(255);
+    //resetButton.draw();
+    //    if (resetButton.isClicked())
+    //    {
+    //      reInitializeTouchPoints();
+    //      Reset();
+    //    }
     firstTrue();
     if (recordButton.isRspClicked())
     {
@@ -308,7 +319,13 @@ void firstTrue() //white left body
   rect(whiteSkeletonX, whiteSkeletonY, 160, 160, 15);
 
   if ((first == true))
-  {
+  { 
+    dx1 = whiteRightHandEndX - whiteRightHandJointX;
+    dy1 = whiteRightHandEndY - whiteRightHandJointY;
+    dx2 = whiteLeftHandEndX - whiteLeftHandJointX;
+    dy2 = whiteLeftHandEndY - whiteLeftHandJointY;
+    angle1_ = atan2(dy1, dx1);  
+    angle2_ = atan2(dy2, dx2);  
     strokeWeight(25);
     stroke(skeletonColor);
     line(whiteRightHandJointX, whiteRightHandJointY, whiteRightHandEndX, whiteRightHandEndY); //white right hand skeleton
@@ -353,8 +370,8 @@ void buttonSetup()
     template1Button.templateClicked();
     template2Button.templateUnClicked();
     template3Button.templateUnClicked();
-    resetButton = new MyButton(resetButtonX, resetButtonY, resetButtonWidth, resetButtonHeight, 0);
-    
+    resetButton = new MyButton(resetButtonX, resetButtonY, resetButtonWidth, resetButtonHeight, "RESET");
+
     buttonSetup = false;
   }
 }
@@ -381,8 +398,24 @@ void reInitializeTouchPoints()
 
 void Reset()
 {
+  buttonSetup = true;
   buttonSetup();
-  playButton.buttonClicked = true;
+  playButton.buttonClicked = false;
   first = true;
+  firstTrue();
+  dx1 = whiteRightHandEndX - whiteRightHandJointX;
+  dy1 = whiteRightHandEndY - whiteRightHandJointY;
+  dx2 = whiteLeftHandEndX - whiteLeftHandJointX;
+  dy2 = whiteLeftHandEndY - whiteLeftHandJointY;
+  angle1_ = atan2(dy1, dx1);  
+  angle2_ = atan2(dy2, dx2);  
+  strokeWeight(25);
+  stroke(skeletonColor);
+  line(whiteRightHandJointX, whiteRightHandJointY, whiteRightHandEndX, whiteRightHandEndY); //white right hand skeleton
+  line(whiteLeftHandJointX, whiteRightHandJointY, whiteLeftHandEndX, whiteLeftHandEndY); //white left hand skeleton
+  stroke(animColor[0]);
+  segment(jYellow_x_, whiteRightHandJointY-15, angle1_, yellowHandLength);
+  segment(jYellow_xL_, whiteRightHandJointY-15, angle2_, yellowHandLength);
+  println("RESET %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 }
 
