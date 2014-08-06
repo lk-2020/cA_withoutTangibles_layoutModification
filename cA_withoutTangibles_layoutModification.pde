@@ -64,7 +64,7 @@ void setup() {
 
 
   template1ButtonX = recordButtonX - template1ButtonWidth/2; 
-  template1ButtonY = dHeight/2 ;
+  template1ButtonY = dHeight/2 + dHeight/4 - 50;
   template2ButtonX = template1ButtonX; 
   template2ButtonY = template1ButtonY+template1ButtonWidth + buttonSpacing;
   template3ButtonX = template2ButtonX; 

@@ -43,7 +43,7 @@ void ifTouchEventIs1()
     jYellow_x_ = (int)jYellow_x1[rec][iterations[rec]];
     //angle[it] = angle1[it];
     angle1_ = angle111[rec][iterations[rec]];
-    ifTouchEventIs1_drawAnimatingHand(rec, iterations[rec], angle1_);
+    ifTouchEventIs1_drawAnimatingHand_R(rec, iterations[rec], angle1_);
     //if ((recordButton.buttonClicked == true)||(record==true))
     if ((recordButton.buttonClicked == true))
     {
@@ -71,7 +71,7 @@ void ifTouchEventIs1()
     yellow_yL_ = (float)yellow_yL1[rec][iterations[rec]];
     jYellow_xL_ = (int)jYellow_xL1[rec][iterations[rec]];
     angle2_ = angle21[rec][iterations[rec]];
-    ifTouchEventIs1_drawAnimatingHand(rec, iterations[rec], angle2_);
+    ifTouchEventIs1_drawAnimatingHand_L(rec, iterations[rec], angle2_);
     //if ((recordButton.buttonClicked == true)||(record==true))
     if ((recordButton.buttonClicked == true))
     {

@@ -130,15 +130,28 @@ public class MyButton {
 
   public void templateDraw() {
     rectMode(CORNER);
+    ellipseMode(CORNER);
     if (buttonClicked == true)
     {
       strokeWeight(3);
       stroke(255, 0, 0);
+      
     }
     if (buttonClicked == false)
-      noStroke();
+    {
+      strokeWeight(3);
+      stroke(0);
+      
+    }
     fill(animColor[tColor]);
-    rect(buttonX, buttonY, buttonWidth, buttonHeight, corners, corners, corners, corners);
+    //rect(buttonX, buttonY, buttonWidth, buttonHeight, corners, corners, corners, corners);
+    ellipse(buttonX, buttonY, buttonWidth, buttonHeight);
+    if (buttonClicked == true)
+    {
+      fill(180,110);
+      
+      ellipse(buttonX, buttonY, buttonWidth, buttonHeight);
+    }
   }
 
 
@@ -171,6 +184,7 @@ public class MyButton {
   }
 
   public void drawRoundButtons(int i) {
+    ellipseMode(CENTER);
     strokeWeight(3);
     if (buttonClicked == true)
       stroke(255, 0, 0);
