@@ -1,94 +1,8 @@
-int dWidth=1280;
-int dHeight=720;
-int numRcordings=0;
-
-int[] iterations;
-int rec = 0;
-
-color skeletonColor = 50;
-boolean first;
-
-boolean buttonSetup = true;
-
-MyButton recordButton;
-MyButton stopButton;
-MyButton playButton;
-
-MyButton template1Button;
-MyButton template2Button;
-MyButton template3Button;
-
-MyButton doneRp_Button;
-
-MyButton resetButton;
-
-                                                                                            
-int recordButtonX;
-int recordButtonY;
-int recordButtonWidth = 100;
-int recordButtonHeight = 50;
-
-int stopButtonX;
-int stopButtonY;
-int stopButtonWidth = 100;
-int stopButtonHeight = 50;
-
-int playButtonX;
-int playButtonY;
-int playButtonWidth = 100;
-int playButtonHeight = 50;
-
-int buttonSpacing = 20;
-
-int template1ButtonX;
-int template1ButtonY;
-int template1ButtonWidth = 50;
-int template1ButtonHeight = 50;
-
-int template2ButtonX;
-int template2ButtonY;
-int template2ButtonWidth = template1ButtonWidth;
-int template2ButtonHeight = template1ButtonHeight;
-
-int template3ButtonX;
-int template3ButtonY;
-int template3ButtonWidth = template1ButtonWidth;
-int template3ButtonHeight = template1ButtonHeight;
-
-int doneRp_ButtonX;
-int doneRp_ButtonY;
-int doneRp_ButtonWidth = 100;
-int doneRp_ButtonHeight = 80;
-
-int resetButtonX = 10;
-int resetButtonY = dHeight-70;
-int resetButtonWidth = 100;
-int resetButtonHeight = 60;
-
-int num;
-
-MyButton[] rp_Button;
-int[] rp_ButtonX;
-int[] rp_ButtonY;
-int rp_ButtonWidth = 70;
-int rp_ButtonHeight = 45;
-String[] recording = {
-  "REC 1", "REC 2", "REC 3", "REC 4", "REC 5", "REC 6", "REC 7", "REC 8", "REC 9", "REC 10",
-};
-
-MyButton[] templateButton;
-int[] templateButtonX;
-int[] templateButtonY;
-int templateButtonWidth = 50;
-int templateButtonHeight = 50;
-
-color[] templateColor = {
-  color(255, 255, 0)/*yellow*/, color(125, 193, 255)/*pink*/, color(184, 20, 103)/*blue*/
-};
-
-boolean inHere = false;
 
 void setup() {
+
+  jYellow_x1___=animatingFaceX-whiteSkeletonXincr+yellowFaceSize;
+  jYellow_xL1___=animatingFaceX-whiteSkeletonXincr;
   first = true;
   //size(displayWidth, displayHeight);
   size(1280, 720);
@@ -152,9 +66,9 @@ void setup() {
   template1ButtonX = recordButtonX - template1ButtonWidth/2; 
   template1ButtonY = dHeight/2 ;
   template2ButtonX = template1ButtonX; 
-  template2ButtonY = template1ButtonY+template1ButtonWidth;
+  template2ButtonY = template1ButtonY+template1ButtonWidth + buttonSpacing;
   template3ButtonX = template2ButtonX; 
-  template3ButtonY = template2ButtonY+template2ButtonWidth;
+  template3ButtonY = template2ButtonY+template2ButtonWidth + buttonSpacing;
 
   rp_Button = new MyButton[11];//10 recordings possible  (1-10)
   rp_ButtonX = new int[11];
@@ -169,6 +83,8 @@ void setup() {
   doneRp_ButtonY = dHeight-100;
 
   doneRp_Button = new MyButton(doneRp_ButtonX, doneRp_ButtonY, doneRp_ButtonWidth, doneRp_ButtonHeight, "DONE");
+
+  charColor1[0][0] = 'y';
 }
 
 //-----------------------------------------------------------------------------------------
@@ -248,12 +164,15 @@ void draw() {
 
   else if (playButton.buttonClicked == true)
   {
-
     recordButton.buttonClicked = false;
     background(255);
     doneRp_Button.draw();
     //doneRp_Button.rp_Draw();
     whichIsClicked();
+
+    drawAnimatedHand(num___, iter___, jYellow_x1___, angle111___);
+    drawAnimatedHand(num___, iter___, jYellow_xL1___, angle21___);
+    drawAnimatedChar(num___, iter___);
 
     if (iterations[num] != 0)
     {
@@ -263,35 +182,39 @@ void draw() {
         {
           background(255);
           doneRp_Button.draw();
-          iter++;
-          if (!((yellow_x1[num][iter] == 0.0)||(yellow_y1[num][iter] == 0.0)))
+
+          drawAnimatedChar(num, iter);
+          if ((yellow_x1[num][iter] != 0.0)&&(yellow_y1[num][iter] != 0.0))
           {
-
-            drawAnimatedChar(num, iter);
-
-            if (touchEvent_1[num][iter] == true)
-            {
-              if ((yellow_x1[num][iter] != 0.0)&&(yellow_y1[num][iter] != 0.0))
-                drawAnimatedHand(num, iter, (int)yellow_x1[num][iter], (int)yellow_y1[num][iter], (int)jYellow_x1[num][iter], angle11[num][iter]);
-            }
-            else if (touchEvent_1[num][iter] == false)
-            {
-              if ((yellow_x1[num][iter] != 0.0)&&(yellow_y1[num][iter] != 0.0))
-                drawAnimatedHand(num, iter, (int)yellow_x1[num][iter], (int)yellow_y1[num][iter], (int)jYellow_x1[num][iter], angle111[num][iter]);
-              if ((yellow_xL1[num][iter] != 0.0)&&(yellow_yL1[num][iter] != 0.0))
-                drawAnimatedHand(num, iter, (int)yellow_xL1[num][iter], (int)yellow_yL1[num][iter], (int)jYellow_xL1[num][iter], angle21[num][iter]);
-            }
+            drawAnimatedHand(num, iter, (int)jYellow_x1[num][iter], angle111[num][iter]);
+            num___ = num;
+            iter___ = iter;
+            jYellow_x1___ = (int)jYellow_x1[num][iter];
+            angle111___ = angle111[num][iter];
           }
+          else if ((yellow_x1[num][iter] == 0.0)&&(yellow_y1[num][iter] == 0.0))
+          {
+            drawAnimatedHand(num___, iter___, jYellow_x1___, angle111___);
+          }
+          if ((yellow_xL1[num][iter] != 0.0)&&(yellow_yL1[num][iter] != 0.0))
+          {
+            drawAnimatedHand(num, iter, (int)jYellow_xL1[num][iter], angle21[num][iter]);
+            num___ = num;
+            iter___ = iter;
+            jYellow_xL1___ = (int)jYellow_xL1[num][iter];
+            angle21___ = angle21[num][iter];
+          }
+          else if ((yellow_xL1[num][iter] == 0.0)&&(yellow_yL1[num][iter] == 0.0))
+          {
+            drawAnimatedHand(num___, iter___, jYellow_xL1___, angle21___);
+          }
+          iter++;
         }
         else
         {
           iter = 0;
           rp_Button[num].buttonClicked = false;
         }
-      }
-      else if (iterations[num] == 0)
-      {
-        //playButton.buttonClicked = false;
       }
     }
   }
@@ -333,6 +256,8 @@ void firstTrue() //white left body
     stroke(animColor[0]);
     segment(jYellow_x_, whiteRightHandJointY-15, angle1_, yellowHandLength);
     segment(jYellow_xL_, whiteRightHandJointY-15, angle2_, yellowHandLength);
+    angle111___ = angle1_;
+    angle21___ = angle2_;
   }
 }
 

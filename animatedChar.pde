@@ -21,7 +21,7 @@ void drawAnimatedChar(int num1, int iter)
   arc(animatingFaceX-75+75, animatingFaceY+25+25, 75, 75, 0, PI, OPEN);
 }
 
-void drawAnimatedHand(int num1, int iter, float yxx, float yyy, int join, float angle)
+void drawAnimatedHand(int num1, int iter, int join, float angle)
 {
   if (charColor1[num1][iter] == 'y')
     stroke(animColor[0]);

@@ -78,3 +78,103 @@ float angle[], angle1[], angle2[];
 
 
 
+int dWidth=1280;
+int dHeight=720;
+int numRcordings=0;
+
+int[] iterations;
+int rec = 0;
+
+color skeletonColor = 50;
+boolean first;
+
+boolean buttonSetup = true;
+
+MyButton recordButton;
+MyButton stopButton;
+MyButton playButton;
+
+MyButton template1Button;
+MyButton template2Button;
+MyButton template3Button;
+
+MyButton doneRp_Button;
+
+MyButton resetButton;
+
+
+int recordButtonX;
+int recordButtonY;
+int recordButtonWidth = 100;
+int recordButtonHeight = 50;
+
+int stopButtonX;
+int stopButtonY;
+int stopButtonWidth = 100;
+int stopButtonHeight = 50;
+
+int playButtonX;
+int playButtonY;
+int playButtonWidth = 100;
+int playButtonHeight = 50;
+
+int buttonSpacing = 20;
+
+int template1ButtonX;
+int template1ButtonY;
+int template1ButtonWidth = 50;
+int template1ButtonHeight = 50;
+
+int template2ButtonX;
+int template2ButtonY;
+int template2ButtonWidth = template1ButtonWidth;
+int template2ButtonHeight = template1ButtonHeight;
+
+int template3ButtonX;
+int template3ButtonY;
+int template3ButtonWidth = template1ButtonWidth;
+int template3ButtonHeight = template1ButtonHeight;
+
+int doneRp_ButtonX;
+int doneRp_ButtonY;
+int doneRp_ButtonWidth = 100;
+int doneRp_ButtonHeight = 80;
+
+int resetButtonX = 10;
+int resetButtonY = dHeight-70;
+int resetButtonWidth = 100;
+int resetButtonHeight = 60;
+
+int num;
+
+MyButton[] rp_Button;
+int[] rp_ButtonX;
+int[] rp_ButtonY;
+int rp_ButtonWidth = 70;
+int rp_ButtonHeight = 45;
+String[] recording = {
+  "REC 1", "REC 2", "REC 3", "REC 4", "REC 5", "REC 6", "REC 7", "REC 8", "REC 9", "REC 10",
+};
+
+MyButton[] templateButton;
+int[] templateButtonX;
+int[] templateButtonY;
+int templateButtonWidth = 50;
+int templateButtonHeight = 50;
+
+color[] templateColor = {
+  color(255, 255, 0)/*yellow*/, color(125, 193, 255)/*pink*/, color(184, 20, 103)/*blue*/
+};
+
+boolean inHere = false;
+
+
+int jYellow_x1___;//=animatingFaceX-whiteSkeletonXincr+yellowFaceSize;
+int jYellow_xL1___;//=animatingFaceX-whiteSkeletonXincr;
+float angle111___;// = angle1_;
+float angle21___;// = angle2_;
+int num___ = 0;
+int iter___ = 0;
+
+
+
