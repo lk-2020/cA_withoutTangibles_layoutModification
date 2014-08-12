@@ -27,9 +27,9 @@ int whiteSkeletonXincr = 150;
 int whiteSkeletonX = 200+whiteSkeletonXincr;
 int whiteSkeletonY = 720/2;
 
-int whiteRightHandJointX = 250+whiteSkeletonXincr;
+int whiteRightHandJointX = 260+whiteSkeletonXincr;
 int whiteRightHandJointY = 304;
-int whiteLeftHandJointX = whiteRightHandJointX-110;
+int whiteLeftHandJointX = whiteRightHandJointX-120;
 int whiteLeftHandJointY = whiteRightHandJointY;
 int whiteRightHandEndX = 300+200;
 int whiteRightHandEndY = 200;

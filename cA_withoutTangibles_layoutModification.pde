@@ -7,6 +7,7 @@ void setup() {
   //size(displayWidth, displayHeight);
   size(1280, 720);
   //size(2560,1600);
+  //size(1000, 600);
   orientation(LANDSCAPE);
   background(0);
   fill(0, 0, 244);
@@ -143,10 +144,10 @@ void draw() {
     //drawBlueCirclesOnTouch();
     if (TouchEvents != 0)
       first = false;
-    if (TouchEvents == 1)
-      ifTouchEventIs1();
     if (TouchEvents == 2)
       ifTouchEventIs2();
+    if (TouchEvents == 1)
+      ifTouchEventIs1();
 
     if (stopButton.isStopClicked())
     {
@@ -239,6 +240,8 @@ void firstTrue() //white left body
   rectMode(CENTER);
   fill(skeletonColor);
   noStroke();
+  //stroke(skeletonColor);
+  //noFill();
   rect(whiteSkeletonX, whiteSkeletonY, 160, 160, 15);
 
   if ((first == true))
@@ -251,8 +254,10 @@ void firstTrue() //white left body
     angle2_ = atan2(dy2, dx2);  
     strokeWeight(25);
     stroke(skeletonColor);
-    line(whiteRightHandJointX, whiteRightHandJointY, whiteRightHandEndX, whiteRightHandEndY); //white right hand skeleton
-    line(whiteLeftHandJointX, whiteRightHandJointY, whiteLeftHandEndX, whiteLeftHandEndY); //white left hand skeleton
+    //line(whiteRightHandJointX, whiteRightHandJointY, whiteRightHandEndX, whiteRightHandEndY); //white right hand skeleton
+    //line(whiteLeftHandJointX, whiteRightHandJointY, whiteLeftHandEndX, whiteLeftHandEndY); //white left hand skeleton
+    segment(whiteRightHandJointX, whiteRightHandJointY, angle1_, whiteHandLength);
+    segment(whiteLeftHandJointX, whiteRightHandJointY, angle2_, whiteHandLength);
     stroke(animColor[0]);
     segment(jYellow_x_, whiteRightHandJointY-15, angle1_, yellowHandLength);
     segment(jYellow_xL_, whiteRightHandJointY-15, angle2_, yellowHandLength);

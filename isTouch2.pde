@@ -1,5 +1,14 @@
 void ifTouchEventIs2()
 {
+//  if (template1Button.buttonClicked == true)
+//    stroke(animColor[0]);
+//  if (template2Button.buttonClicked == true)
+//    stroke(animColor[1]);
+//  if (template3Button.buttonClicked == true)
+//    stroke(animColor[2]);
+//  segment(jYellow_x_, whiteRightHandJointY-15, angle1_, yellowHandLength);
+//  segment(jYellow_xL_, whiteLeftHandJointY-15, angle2_, yellowHandLength);
+
   touchEvent2 = true;
   touchEvent1 = false;
   int i, j;
@@ -30,7 +39,7 @@ void ifTouchEventIs2()
         yellow_y_ = (float)yellow_y1[rec][iterations[rec]];
         jYellow_x_ = (int)jYellow_x1[rec][iterations[rec]];
         angle1_ = angle111[rec][iterations[rec]];
-        ifTouchEventIs2_drawAnimatingHand(rec, iterations[rec], (float)yellow_x1[rec][iterations[rec]], (float) yellow_y1[rec][iterations[rec]], (int)jYellow_x1[rec][iterations[rec]], (float)angle11[rec][iterations[rec]]);
+        ifTouchEventIs2_drawAnimatingHand(rec, iterations[rec], (float)yellow_x1[rec][iterations[rec]], (float) yellow_y1[rec][iterations[rec]], (int)jYellow_x1[rec][iterations[rec]], (float)angle111[rec][iterations[rec]]);
       }
     }
   }
@@ -43,7 +52,7 @@ void ifTouchEventIs2()
       leftHandJoint1 = sqrt(pow(xTouch[i]-(whiteLeftHandJointX), 2) + pow(yTouch[i]-(whiteLeftHandJointY), 2));
       //sqrtL[i] = sqrt(pow(xTouch[i]-(whiteLeftHandJointX), 2) + pow(yTouch[i]-(whiteLeftHandJointY), 2));
       //if (sqrtL[i] < bufferArea)// check for right joint --- touchid[i] is the right joint
-      if((leftHandJoint1<whiteHandLength+50)&&(leftHandJoint1>whiteHandLength-50))
+      if ((leftHandJoint1<whiteHandLength+50)&&(leftHandJoint1>whiteHandLength-50))
       { 
         touchEvent = true;
         touchEvent_1[rec][iterations[rec]] = false;
@@ -60,7 +69,7 @@ void ifTouchEventIs2()
         jYellow_xL_ = (int)jYellow_xL1[rec][iterations[rec]];
         angle2_ = angle21[rec][iterations[rec]];
         ifTouchEventIs2_drawAnimatingHand(rec, iterations[rec], (float)yellow_xL1[rec][iterations[rec]], (float) yellow_yL1[rec][iterations[rec]], (int)jYellow_xL1[rec][iterations[rec]], (float)angle21[rec][iterations[rec]]);
-       if ((recordButton.buttonClicked == true))
+        if ((recordButton.buttonClicked == true))
         {
           it++;
           iterations[rec]++;

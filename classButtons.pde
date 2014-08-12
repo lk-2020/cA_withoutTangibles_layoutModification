@@ -3,7 +3,8 @@ int buttonInnerHeight = 25;
 
 color clickedColor = color(255, 0, 0);
 color unClickedColor = color(0, 255, 180);
-
+color red = color(255,0,0);
+color bColor;
 color[] animColor = {
   color(255, 255, 0)/*yellow*/, color(125, 193, 255)/*pink*/, color(184, 20, 103)/*blue*/
 };
@@ -94,9 +95,9 @@ public class MyButton {
 
   public boolean isStopClicked() {
 
-    if ((xTouch[0] > buttonX - buttonHeight) && (xTouch[0] < (buttonX + buttonHeight))
-      && (yTouch[0] > buttonY - buttonHeight)
-      && (yTouch[0] < (buttonY + buttonHeight))) {
+    if ((xTouch[0] > buttonX - buttonHeight/2) && (xTouch[0] < (buttonX + buttonHeight/2))
+      && (yTouch[0] > buttonY - buttonHeight/2)
+      && (yTouch[0] < (buttonY + buttonHeight/2))) {
       //if ((x1Touch[0] > x2Touch[0]+5)&&(x1Touch[0] < x2Touch[0]-5)&&(y1Touch[0] < y2Touch[0]-5)&&(y1Touch[0] > y2Touch[0]+5))
       if (inHere == true)
       {
@@ -109,9 +110,9 @@ public class MyButton {
 
   public boolean isRspClicked() {
 
-    if ((xTouch[0] > buttonX - buttonHeight) && (xTouch[0] < (buttonX + buttonHeight))
-      && (yTouch[0] > buttonY - buttonHeight)
-      && (yTouch[0] < (buttonY + buttonHeight))) {
+    if ((xTouch[0] > buttonX - buttonHeight/2) && (xTouch[0] < (buttonX + buttonHeight/2))
+      && (yTouch[0] > buttonY - buttonHeight/2)
+      && (yTouch[0] < (buttonY + buttonHeight/2))) {
       return true;
     }
     return false;
@@ -187,14 +188,21 @@ public class MyButton {
     ellipseMode(CENTER);
     strokeWeight(3);
     if (buttonClicked == true)
-      stroke(255, 0, 0);
+    {
+      bColor = red;
+      //stroke(255, 0, 0);
+    } 
     if (buttonClicked == false)
-      stroke(0);
+    {
+      bColor = 0;
+      //stroke(0);
+    }
     fill(255);
+    stroke(bColor);
     ellipse(buttonX, buttonY, buttonHeight, buttonHeight);
 
     noStroke();
-    fill(0);
+    fill(bColor);
     if (i == 0)
     {
       ellipse(buttonX, buttonY, buttonInnerHeight, buttonInnerHeight); //record

@@ -19,7 +19,7 @@ void ifTouchEventIs1()
   if (template3Button.buttonClicked == true)
     stroke(animColor[2]);
   segment(jYellow_x_, whiteRightHandJointY-15, angle1_, yellowHandLength);
-  segment(jYellow_xL_, whiteRightHandJointY-15, angle2_, yellowHandLength);
+  segment(jYellow_xL_, whiteLeftHandJointY-15, angle2_, yellowHandLength);
 
   if ((rightHandJoint0<bufferArea)&&(rightHandJoint1<whiteHandLength+bufferArea)&&(rightHandJoint1>whiteHandLength-bufferArea)) // right joint id touchId[0]
   {
@@ -52,7 +52,7 @@ void ifTouchEventIs1()
     }
   }
 
-  else if ((leftHandJoint0<bufferArea)&&(leftHandJoint1<whiteHandLength+50)&&(leftHandJoint1>whiteHandLength-50)) // right joint id touchId[0]
+  else if ((leftHandJoint0<bufferArea)&&(leftHandJoint1<whiteHandLength+bufferArea)&&(leftHandJoint1>whiteHandLength-bufferArea)) // right joint id touchId[0]
   {
     whiteLeftHandEndX = (int)xTouch[0];
     whiteLeftHandEndY = (int)yTouch[0];
